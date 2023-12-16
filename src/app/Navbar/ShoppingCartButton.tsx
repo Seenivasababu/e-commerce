@@ -39,7 +39,7 @@ export default function ShoppingCartButton({ cart }: Props) {
              <span className='text-md font-bold'>{cart?.size|| 0} Items</span>
              <span> Subtotal :${cart?.subtotal || 0}</span>
              <div>
-               <Link href={"/"} className='btn btn-primary btn-block' onClick={closeDropDown}>View cart</Link>
+               <Link href={"/cart"} className='btn btn-primary btn-block' onClick={closeDropDown}>View cart</Link>
              </div>
          </div>
       </div>
