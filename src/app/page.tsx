@@ -10,9 +10,11 @@ interface HomeProps {
   };
 }
 
+
 export default async function Home({
   searchParams: { page = '1' },
 }: HomeProps) {
+
   const currentPage = parseInt(page);
 
   const pageSize = 6;
@@ -30,6 +32,7 @@ export default async function Home({
       (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : heroItemCount),
     take: pageSize + (currentPage === 1 ? heroItemCount : 0),
   });
+
   return (
     <div className="flex flex-col items-center">
       {currentPage === 1 && (
@@ -58,7 +61,7 @@ export default async function Home({
       )}
       <div className="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {(currentPage === 1 ? products.slice(1) : products).map((product) => (
-          <ProductCard product={product} />
+          <ProductCard product={product} key={product.id} />
         ))}
       </div>
       {totalPages > 1 && (
