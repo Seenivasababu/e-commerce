@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import PriceTag from '@/components/PriceTag';
 import { Metadata } from 'next';
+import AddToCartButton from './AddToCartButton';
+import { incrementProductQuantity } from './actions';
 
 type Props = {
   params: {
@@ -30,7 +32,7 @@ export async function generateMetadata({
 export default async function ProductPage({ params: { id } }: Props) {
   const product = await getProduct(id);
   return (
-    <div className="flex flex-col md:flex-row gap-4 md:items-center">
+    <div className="flex flex-col md:flex-row gap-4 md:items-center" >
       <Image
         src={product.imageUrl}
         alt={product.name}
@@ -43,6 +45,7 @@ export default async function ProductPage({ params: { id } }: Props) {
         <h1 className="text-5xl font-bold">{product.name}</h1>
         <PriceTag price={product.price} className="mt-4" />
         <p className="py-6">{product.description}</p>
+        <AddToCartButton productId={product.id} incrementProductQuantity={incrementProductQuantity}/>
       </div>
     </div>
   );
