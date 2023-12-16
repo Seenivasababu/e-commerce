@@ -19,6 +19,7 @@ export type ShoppingCart = CartWithProducts & {
 
 export async function getCart(): Promise<ShoppingCart | null> {
   const session = await getServerSession(authOptions);
+
   let cart: CartWithProducts | null = null;
 
   if (session) {
@@ -68,9 +69,10 @@ export async function createCart(): Promise<ShoppingCart> {
     newCart = await prisma.cart.create({
       data: {},
     });
+    cookies().set('localCartId', newCart.id);
   }
 
-  cookies().set('localCartId', newCart.id);
+  
   return {
     ...newCart,
     items: [],

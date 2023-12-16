@@ -11,9 +11,9 @@ export const metadata = {
 async function addProduct(formData: FormData) {
   'use server';
 
-  const session = await getServerSession(authOptions)
-  if(!session){
-    redirect("/api/auth/signin?callbackUrl=/add-product")
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/api/auth/signin?callbackUrl=/add-product');
   }
 
   const name = formData.get('name')?.toString();
@@ -24,6 +24,7 @@ async function addProduct(formData: FormData) {
   if (!name || !description || !imageUrl || !price) {
     throw Error('Missing required fields');
   }
+
   await prisma.products.create({
     data: {
       name,
@@ -32,13 +33,14 @@ async function addProduct(formData: FormData) {
       price,
     },
   });
+
   redirect('/');
 }
 
 export default async function AddProductPage() {
-  const session = await getServerSession(authOptions)
-  if(!session){
-    redirect("/api/auth/signin?callbackUrl=/add-product")
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/api/auth/signin?callbackUrl=/add-product');
   }
   return (
     <div>
@@ -70,9 +72,7 @@ export default async function AddProductPage() {
           placeholder="Price"
           className="mb-3 w-full input input-bordered"
         />
-        <FormButton className=" btn-block">
-          Add Product
-        </FormButton>
+        <FormButton className=" btn-block">Add Product</FormButton>
       </form>
     </div>
   );
