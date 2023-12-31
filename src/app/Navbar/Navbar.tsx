@@ -28,6 +28,9 @@ export default async function Navbar() {
             <Image src={logo} alt="logo" height={40} width={40} />
             Floricon
           </Link>
+          <Link href="/add-product">
+            <button className='btn btn-ghost'> Add Product</button>
+          </Link>
         </div>
         <div className="flex-none gap-2">
         <form action={searchProducts}>
